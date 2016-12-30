@@ -30,6 +30,7 @@ type WorkerConfig struct {
 type ApiConfig struct {
 	Sms  string `json:"sms"`
 	Mail string `json:"mail"`
+	Chat string `json:"chat"`
 }
 
 type GlobalConfig struct {

@@ -35,10 +35,9 @@ func SendSms(sms *model.Sms) {
 	}()
 
 	url := g.Config().Api.Sms
-	r := httplib.Post(url).SetTimeout(5*time.Second, 2*time.Minute)
-	r.Param("tos", sms.Tos)
-	r.Param("content", sms.Content)
-	resp, err := r.String()
+	chatUrl := g.Config().Api.Chat
+	resp, err := MsgPost(url, sms.Tos,sms.Content)
+	resp2, err := MsgPost(chatUrl, sms.Tos,sms.Content)
 	if err != nil {
 		log.Println(err)
 	}
@@ -48,6 +47,14 @@ func SendSms(sms *model.Sms) {
 	if g.Config().Debug {
 		log.Println("==sms==>>>>", sms)
 		log.Println("<<<<==sms==", resp)
+		log.Println("<<<<==chat==", resp2)
 	}
 
+}
+
+func  MsgPost(url,tos,content string)(string, error){
+	r := httplib.Post(url).SetTimeout(5*time.Second, 2*time.Minute)
+	r.Param("tos", tos)
+	r.Param("content", content)
+	return r.String()
 }
