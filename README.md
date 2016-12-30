@@ -1,4 +1,4 @@
-falcon-sender
+falcon-sender(搭配[微信企业号接口](http://github.com/yanjunhui/chat)使用)
 =============
 
 alarm处理报警event可能会产生报警短信或者报警邮件，alarm不负责发送，只是把报警邮件、短信写入redis队列，sender负责读取并发
